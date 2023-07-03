@@ -1,4 +1,4 @@
-# Attempt 1
+# Attempt 1 - O(n^2)
 class Solution:
     def twoSum(self, nums: List[int], target: int) -> List[int]:
         length = len(nums)
@@ -9,28 +9,35 @@ class Solution:
                     indices = [i, j]
         return indices
 
-# Attempt 2
+# Attempt 2 - O(n)
 class Solution:
-    def isPalindrome(self, x: int) -> bool:
-        string = str(x)
-        return string == string[::-1]
+    def twoSum(self, nums: List[int], target: int) -> List[int]:
+        if(len(nums) == 2):
+            return [0, 1]
+        dictionary = {}
+        for i, n1 in enumerate(nums):
+            n2 = target - n1
+            if(n2 in dictionary):
+                return [i, dictionary[n2]]
+            dictionary[n1] = i
 
-# Attempt 3 - if condition rules out a lot of calculation and helps in faster compute
+# Attempt 3 - TIME LIMIT EXCEEDED
 class Solution:
-    def isPalindrome(self, x: int) -> bool:
-        if x < 0:
-            return False
-        string = str(x)
-        return string == string[::-1]
+    def containsDuplicate(self, nums: List[int]) -> bool:
+        while(len(nums)):
+            n = nums.pop()
+            if(n in nums):
+                return True
+        return False
 
-# Attempt 4 (worse than #3)
+# Attempt 4 -
+# Time - better than #1
+# Space - worse than #1
 class Solution:
-    def isPalindrome(self, x: int) -> bool:
-        if x < 0:
-            return False
-        x_copy = x
-        new_x = 0
-        while x_copy > 0:
-            new_x = (new_x * 10) + x_copy % 10
-            x_copy = x_copy // 10
-        return new_x == x
+    def containsDuplicate(self, nums: List[int]) -> bool:
+        cache = set()
+        for n in nums:
+            if n in cache:
+                return True
+            cache.add(n)
+        return False

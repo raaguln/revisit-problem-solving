@@ -15,3 +15,17 @@ class Solution:
                 right_prod *= n
             result.append(left_prod * right_prod)
         return result
+
+# Attempt 2 - best
+class Solution:
+    def productExceptSelf(self, nums: List[int]) -> List[int]:
+        prod = [1] * len(nums)
+        pre = 1
+        for i in range(len(nums)):
+            prod[i] = pre
+            pre *= nums[i]
+        post = 1
+        for i in range(1, len(nums) + 1):
+            prod[-i] *= post
+            post *= nums[-i]
+        return prod

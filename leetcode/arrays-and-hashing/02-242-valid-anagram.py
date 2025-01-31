@@ -1,21 +1,12 @@
-# Attempt 1
-# Good runtime, bad memory
-class Solution:
-    def isAnagram(self, s: str, t: str) -> bool:
-        s_list = sorted(list(s))
-        t_list = sorted(list(t))
-        if s_list == t_list:
-            return True
-        return False
-
-# Attempt 2
-# Bad runtime, Better memory
+# Time - O(nlogn)
+# Space - O(n)
 class Solution:
     def isAnagram(self, s: str, t: str) -> bool:
         return sorted(s) == sorted(t)
 
 # Attempt 3
-# Mediocre runtime, Good memory
+# Time - O(n)
+# Space - O(n)
 class Solution:
     def isAnagram(self, s: str, t: str) -> bool:
         if(len(s) != len(t)):
@@ -26,3 +17,11 @@ class Solution:
             cacheS[s[i]] = cacheS.get(s[i], 0) + 1
             cacheT[t[i]] = cacheT.get(t[i], 0) + 1
         return cacheS == cacheT
+    
+# Attempt 4
+# Time - O(n)
+# Space - O(n)    
+from collections import Counter
+class Solution:
+    def isAnagram(self, s: str, t: str) -> bool:
+        return Counter(s) == Counter(t)

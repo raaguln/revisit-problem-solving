@@ -1,0 +1,18 @@
+# Time: O(klogn)
+# Space: O(n)
+import heapq
+
+class Solution:
+    def findKthLargest(self, nums: List[int], k: int) -> int:
+        # Construct max heap
+        for i in range(len(nums)):
+            nums[i] = -nums[i]
+        heapq.heapify(nums)
+
+        kthElem = 0
+        i = 1
+        while i <= k:
+            kthElem = heapq.heappop(nums)
+            i += 1
+        return -kthElem
+        

@@ -12,7 +12,6 @@ class Solution:
         decreasing = sorted(count.items(), key=lambda x: x[1], reverse=True)
         return "".join([char*count for char, count in decreasing])
 
-
 # 2. Bucket Sort
 # Time: O(n)
 # Space: O(n)

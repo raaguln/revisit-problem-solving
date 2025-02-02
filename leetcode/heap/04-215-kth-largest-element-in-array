@@ -1,4 +1,4 @@
-# Time: O(klogn)
+# Time: O(klogn) - heappop is O(logn) and we do it k times
 # Space: O(n)
 import heapq
 
@@ -16,3 +16,36 @@ class Solution:
             i += 1
         return -kthElem
         
+# Time: O(n) - average case, O(n^2) - worst case
+# Space: O(logn) - average case, O(n) - worst case
+class Solution:
+    def findKthLargest(self, nums: List[int], k: int) -> int:
+        def quickSelect(arr, k):
+            if len(arr) == 1:
+                return arr[0]
+
+            pivot = arr[len(arr) // 2]
+
+            # Create left, middle, and right (ascending order)
+            # Note - if you do descending order here, modify accordingly below
+            left, middle, right = [], [], []
+            for num in arr:
+                if num > pivot:
+                    right.append(num)
+                elif num == pivot:
+                    middle.append(num)
+                else:
+                    left.append(num)
+            
+            # kth largest (start searching from right)
+            leftLen, midLen, rightLen = len(left), len(middle), len(right)
+            if k < rightLen:
+                return quickSelect(right, k)
+            elif k < rightLen + midLen:
+                return middle[0]
+            else:
+                return quickSelect(left, k - rightLen - midLen)
+        
+        # 0 based index
+        return quickSelect(nums, k-1)
+            

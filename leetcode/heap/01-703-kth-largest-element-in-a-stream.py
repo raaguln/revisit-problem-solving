@@ -19,3 +19,4 @@ class KthLargest:
         else:
             heapq.heappushpop(self.heap, val)
         return self.heap[0]
+

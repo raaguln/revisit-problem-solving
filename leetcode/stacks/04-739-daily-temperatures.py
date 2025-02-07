@@ -16,3 +16,19 @@ class Solution:
                 i
             ))
         return output
+    
+
+# Cleaner solution using template
+# Time: O(n)
+class Solution:
+    def dailyTemperatures(self, temperatures: List[int]) -> List[int]:
+        # Next greater element
+        n = len(temperatures)
+        waitDays = [0] * n
+        stack = []
+        for i in range(n):
+            while stack and temperatures[i] > temperatures[stack[-1]]:
+                nextSmallestI = stack.pop()
+                waitDays[nextSmallestI] = i - nextSmallestI
+            stack.append(i)
+        return waitDays

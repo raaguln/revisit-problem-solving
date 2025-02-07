@@ -49,3 +49,39 @@ for i in range(len(nums)):
     printStack(stack, nums)
 print(nums)
 print(output)
+
+'''
+3. Previous greater element
+'''
+nums = [5,7,2,8,0,3,3,6,7]
+n = len(nums)
+output = [-1] * n
+
+# Stores indices only
+stack = []
+for i in range(len(nums)-1, -1, -1):
+    while stack and nums[i] > nums[stack[-1]]:
+        index = stack.pop()
+        output[index] = nums[i]
+    stack.append(i)
+    printStack(stack, nums)
+print(nums)
+print(output)
+
+'''
+4. Previous smaller element
+'''
+nums = [5,7,2,8,0,3,3,6,7]
+n = len(nums)
+output = [-1] * n
+
+# Stores indices only
+stack = []
+for i in range(len(nums)-1, -1, -1):
+    while stack and nums[i] < nums[stack[-1]]:
+        index = stack.pop()
+        output[index] = nums[i]
+    stack.append(i)
+    printStack(stack, nums)
+print(nums)
+print(output)

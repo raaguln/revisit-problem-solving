@@ -1,3 +1,4 @@
+# https://leetcode.com/problems/reverse-linked-list-ii/description/
 '''
 Need to look into it again
 '''
@@ -19,8 +20,11 @@ class Solution:
         curr = prevTemp.next
         prev = None
         for _ in range(right - left + 1):
+            # Store next node
             nextt = curr.next
+            # Reverse current link
             curr.next = prev
+            # Move pointers
             prev = curr
             curr = nextt
 

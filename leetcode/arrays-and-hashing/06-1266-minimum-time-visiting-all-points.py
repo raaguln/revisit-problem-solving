@@ -1,3 +1,5 @@
+# https://leetcode.com/problems/minimum-time-visiting-all-points/description/
+# This problem tells to visit in order, that's the only reason it's this simple.
 # Time: O(n)
 # Space: O(1)
 class Solution:

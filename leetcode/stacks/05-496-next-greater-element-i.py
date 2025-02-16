@@ -1,3 +1,4 @@
+# https://leetcode.com/problems/next-greater-element-i/description/
 # Faster, but .index() is slow
 # Time: O(n)
 # Space: O(n)

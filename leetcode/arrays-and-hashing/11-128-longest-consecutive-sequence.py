@@ -1,3 +1,4 @@
+# https://leetcode.com/problems/longest-consecutive-sequence/description/
 # Time: O(nlogn) - sorting
 # Space: O(n) - set
 class Solution:

@@ -1,3 +1,4 @@
+# https://leetcode.com/problems/how-many-numbers-are-smaller-than-the-current-number/description/
 '''
 Sort the index and store first occurrence of number with index.
 Index will be the number of elements smaller than current no.

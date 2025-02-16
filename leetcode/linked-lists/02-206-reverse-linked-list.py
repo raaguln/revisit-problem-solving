@@ -35,8 +35,11 @@ class Solution:
         curr = head
         prev = None
         while curr:
+            # Store next node
             nextt = curr.next
+            # Reverse current link
             curr.next = prev
+            # Move pointers
             prev = curr
             curr = nextt
         return prev

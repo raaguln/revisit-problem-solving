@@ -1,3 +1,4 @@
+# https://leetcode.com/problems/k-closest-points-to-origin/description/
 # Time: O(nlogk) + O(klogn) = O(nlogn)
 # Space: O(n)
 import heapq

@@ -1,3 +1,4 @@
+# 
 # Not binary search per se, but try using that approach
 # Pattern recog
 # Time: O(rows + cols)

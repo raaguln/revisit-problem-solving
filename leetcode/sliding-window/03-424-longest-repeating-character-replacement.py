@@ -45,28 +45,54 @@ class Solution:
                 mods += 1
         return longestSubLength
 
-# Works
-# Time: O(n)
-# Space: O(n)
+
 class Solution:
-    def checkInclusion(self, s1: str, s2: str) -> bool:
-        l1, l2 = len(s1), len(s2)
-        if l1 > l2:
-            return False
+    def characterReplacement(self, s: str, k: int) -> int:
+        count = {}  
+        left = 0
 
-        count1, count2 = [0] * 26, [0] * 26
-        for i in range(l1):
-            c1, c2 = s1[i], s2[i]
-            count1[ord(c1) - ord('a')] += 1
-            count2[ord(c2) - ord('a')] += 1
+        # Stores max frequency of any character in the window
+        max_freq = 0
+        max_length = 0
         
-        if count1 == count2:
-            return True
+        for right in range(len(s)):
+            # Get count of current character
+            count[s[right]] = count.get(s[right], 0) + 1
+            max_freq = max(max_freq, count[s[right]])
 
-        # Maintain the fixed window size
-        for right in range(l1, l2):
-            count2[ord(s2[right]) - ord('a')] += 1
-            count2[ord(s2[right-l1]) - ord('a')] -= 1
-            if count1 == count2:
-                return True
-        return False
+            # Check if the remaining characters can be replaced
+            # (window size) - max_freq > k
+            while (right - left + 1) - max_freq > k:
+                count[s[left]] -= 1
+                left += 1
+            
+            max_length = max(max_length, right - left + 1)
+        
+        return max_length
+   
+
+# # Works
+# # Time: O(n)
+# # Space: O(n)
+# class Solution:
+#     def checkInclusion(self, s1: str, s2: str) -> bool:
+#         l1, l2 = len(s1), len(s2)
+#         if l1 > l2:
+#             return False
+
+#         count1, count2 = [0] * 26, [0] * 26
+#         for i in range(l1):
+#             c1, c2 = s1[i], s2[i]
+#             count1[ord(c1) - ord('a')] += 1
+#             count2[ord(c2) - ord('a')] += 1
+        
+#         if count1 == count2:
+#             return True
+
+#         # Maintain the fixed window size
+#         for right in range(l1, l2):
+#             count2[ord(s2[right]) - ord('a')] += 1
+#             count2[ord(s2[right-l1]) - ord('a')] -= 1
+#             if count1 == count2:
+#                 return True
+#         return False

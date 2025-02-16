@@ -1,3 +1,4 @@
+# https://leetcode.com/problems/last-stone-weight/description/
 # Time: O(nlogn) - n * each heap operation (log n)
 # Space: O(n) - heap
 import heapq

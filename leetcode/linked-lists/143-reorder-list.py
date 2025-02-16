@@ -42,6 +42,9 @@ class Solution:
             
 
  
+# L1 - start till midpoint
+# L2 - midpoint till end (but links can't be traversed backwards)
+#    - so reverse links in L2 (mid till end)
 
 # Time: O(n)
 # Space: O(1)
@@ -61,10 +64,10 @@ class Solution:
             slow = slow.next
             fast = fast.next.next
 
-        # Reverse links for second half
-
         # Move to 3 (even) / 4 (odd)
         second = slow.next
+
+        # Reverse links for second half
         prev = None
         slow.next = None
         while second:

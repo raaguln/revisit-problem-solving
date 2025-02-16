@@ -1,3 +1,4 @@
+# https://leetcode.com/problems/kth-largest-element-in-an-array/description/
 # Time: O(klogn) - heappop is O(logn) and we do it k times
 # Space: O(n)
 import heapq
@@ -15,6 +16,23 @@ class Solution:
             kthElem = heapq.heappop(nums)
             i += 1
         return -kthElem
+    
+
+# Use min heap instead - saves memory
+class Solution:
+    def findKthLargest(self, nums: List[int], k: int) -> int:
+        # Create a min heap with the first k elements
+        min_heap = nums[:k]
+        heapq.heapify(min_heap)  # O(k) time to build the heap
+        
+        # Process remaining elements
+        for num in nums[k:]:
+            heapq.heappushpop(min_heap, num)  # O(log k) per operation
+
+        return min_heap[0]  # kth largest element (smallest in heap)
+    
+
+
         
 # Time: O(n) - average case, O(n^2) - worst case
 # Space: O(logn) - average case, O(n) - worst case

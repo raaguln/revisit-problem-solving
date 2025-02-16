@@ -1,3 +1,4 @@
+# https://leetcode.com/problems/longest-substring-without-repeating-characters/description/
 # Did not work cauz of wrong updates to pointers
 class Solution:
     def lengthOfLongestSubstring(self, s: str) -> int:

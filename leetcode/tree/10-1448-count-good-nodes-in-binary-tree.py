@@ -1,3 +1,4 @@
+# https://leetcode.com/problems/count-good-nodes-in-binary-tree/
 # Slightly innefficient cauz we pass the entire path
 # Time: O(n) - height of the tree and comparison is log n
 # Space: O(logn + k)

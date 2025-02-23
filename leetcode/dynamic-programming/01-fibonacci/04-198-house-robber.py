@@ -28,14 +28,15 @@ Space: O(n)
 '''
 class Solution:
     def rob(self, nums: List[int]) -> int:
-        def subproblem(nums):
-            if len(nums) <= 0:
+        def recursion(i):
+            if i >= len(nums):
                 return 0
-            return max(
-                nums[0] + subproblem(nums[2:]),
-                subproblem(nums[1:])
-            )
-        return subproblem(nums)
+            selectFirst = nums[i] + recursion(i+2)
+            selectSecond = recursion(i+1)
+            maxProfit = max(selectFirst, selectSecond)
+            return maxProfit
+        return recursion(0)
+        
     
 '''
 Recursion, top down, memoization:
@@ -59,6 +60,20 @@ class Solution:
             self.cache[tupleNums] = value
             return value
         return subproblem(nums)
+
+# lru cache
+class Solution:
+    def rob(self, nums: List[int]) -> int:
+        @lru_cache(None)
+        def recursion(i):
+            if i >= len(nums):
+                return 0
+            selectFirst = nums[i] + recursion(i+2)
+            selectSecond = recursion(i+1)
+            maxProfit = max(selectFirst, selectSecond)
+            return maxProfit
+        return recursion(0)
+        
 
 '''
 Bottom up brainstorm:
@@ -96,19 +111,23 @@ Space: O(n)
 '''
 class Solution:
     def rob(self, nums: List[int]) -> int:
-        if len(nums) == 0:
-            return 0
+        if not nums:
+            return None
         if len(nums) == 1:
             return nums[0]
-        table = [0] * len(nums)
-        table[0] = nums[0]
-        table[1] = max(nums[0], nums[1])
-        for i in range(2, len(table)):
-            table[i] = max(
-                nums[i] + table[i-2],
-                table[i-1]
-            )
-        return table[-1]
+        
+        n = len(nums)
+        
+        result = [0] * n
+        result[0] = nums[0]
+        result[1] = max(nums[0], nums[1])
+
+        for i in range(2, n):
+            robCurrent = nums[i] + result[i-2]
+            notRobCurrent = result[i-1]
+            result[i] = max(robCurrent, notRobCurrent)
+        return result[-1]
+
 
 '''
 Iterative, bottom-up, tabulation, space optimized:
@@ -117,26 +136,21 @@ Space: O(1)
 '''
 class Solution:
     def rob(self, nums: List[int]) -> int:
-        if len(nums) == 0:
-            return 0
+        if not nums:
+            return None
         if len(nums) == 1:
             return nums[0]
-        first, second = nums[0], max(nums[0], nums[1])
-        for i in range(2, len(nums)):
-            value = max(
-                nums[i] + first,
-                second
-            )
-            first, second = second, value
-        return second
-    
-class Solution:
-    def rob(self, nums: List[int]) -> int:
-        first, second = 0, 0
-        for i in range(len(nums)):
-            value = max(
-                nums[i] + first,
-                second
-            )
-            first, second = second, value
-        return second
+        
+        n = len(nums)
+        
+        lastBeforeHouse = nums[0]
+        lastHouse = max(nums[0], nums[1])
+
+        for i in range(2, n):
+            robCurrent = nums[i] + lastBeforeHouse
+            notRobCurrent = lastHouse
+            temp = max(robCurrent, notRobCurrent)
+            lastBeforeHouse, lastHouse = lastHouse, temp 
+        return lastHouse
+
+        

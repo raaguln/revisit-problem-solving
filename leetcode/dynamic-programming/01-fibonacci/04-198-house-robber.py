@@ -47,19 +47,29 @@ class Solution:
     def __init__(self):
         self.cache = {}
     def rob(self, nums: List[int]) -> int:
-        def subproblem(nums):
-            if len(nums) <= 0:
+        def recursion(i):
+            if i >= len(nums):
                 return 0
-            tupleNums = tuple(nums)
-            if tupleNums in self.cache:
-                return self.cache[tupleNums]
-            value = max(
-                nums[0] + subproblem(nums[2:]),
-                subproblem(nums[1:])
-            )
-            self.cache[tupleNums] = value
-            return value
-        return subproblem(nums)
+            
+            # Get values from cache if there
+            recursioni2 = None
+            if i+2 in self.cache:
+                recursioni2 = self.cache[i+2]
+            else:
+                recursioni2 = recursion(i+2)
+
+            recursioni1 = None
+            if i+1 in self.cache:
+                recursioni1 = self.cache[i+1]
+            else:
+                recursioni1 = recursion(i+1)
+
+            robFirst = nums[i] + recursioni2
+            robSecond = recursioni1
+            maxVal = max(robFirst, robSecond)
+            self.cache[i] = maxVal
+            return maxVal
+        return recursion(0)
 
 # lru cache
 class Solution:

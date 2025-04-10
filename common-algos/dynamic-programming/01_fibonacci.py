@@ -22,6 +22,8 @@ def memoized_fib(n):
 
 # Bottom up - DP
 def memoized_fib2(n):
+  if n == 0:
+    return 0
   if n <= 2:
     return 1
   a, b = 1, 1

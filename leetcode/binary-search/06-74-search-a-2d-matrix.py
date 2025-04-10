@@ -1,4 +1,4 @@
-
+# https://leetcode.com/problems/search-a-2d-matrix/
 # Did not fully implement 2d binary search, but still passed all test cases and top solution
 # Time (as of now): O(nlogn) - logn for binary search on rows, n for checking if target is in the row
 class Solution:
@@ -9,10 +9,10 @@ class Solution:
         leftJ, rightJ = 0, cols
         while leftI < rightI:
             midI = (leftI + rightI) // 2
-            if target < matrix[midI][0]:
-                rightI = midI
-            elif target > matrix[midI][-1]:
+            if matrix[midI][-1] < target:
                 leftI = midI + 1
+            elif matrix[midI][0] > target:
+                rightI = midI
             else:
                 return target in matrix[midI]
                 # while leftJ < rightJ:

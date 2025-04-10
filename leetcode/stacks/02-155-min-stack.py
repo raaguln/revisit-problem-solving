@@ -1,3 +1,4 @@
+# https://leetcode.com/problems/min-stack/
 class MinStack:
     def __init__(self):
         # Stores (value, minTillThisPosition)

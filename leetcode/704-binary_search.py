@@ -104,9 +104,11 @@ class Solution:
 '''
 class Solution:
     def search(self, nums: List[int], target: int) -> int:
+        # You don't need this case as it gets evaluated in the below while condition
         if len(nums) == 0:
             return -1
         left, right = 0, len(nums) - 1
+        # If you do left < right, it will return -1 for nums = [5] where target = 5
         while left <= right:
             mid = (left + right) // 2
             if nums[mid] == target:
@@ -114,5 +116,24 @@ class Solution:
             elif nums[mid] > target:
                 right = mid - 1
             elif nums[mid] < target:
+                left = mid + 1
+        return -1
+
+'''
+Most optimal solution
+Time complexity - O(log N) - each time, the search space is halved
+Space complexity - O(1) - constant amount of extra space
+'''
+class Solution:
+    def search(self, nums: List[int], target: int) -> int:
+        left, right = 0, len(nums) - 1
+        # If you do left < right, it will return -1 for nums = [5] where target = 5
+        while left <= right:
+            mid = (left + right) // 2
+            if nums[mid] == target:
+                return mid
+            elif nums[mid] > target:
+                right = mid - 1
+            else:
                 left = mid + 1
         return -1

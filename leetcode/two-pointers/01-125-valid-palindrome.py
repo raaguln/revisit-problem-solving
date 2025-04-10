@@ -1,3 +1,4 @@
+# https://leetcode.com/problems/valid-palindrome/
 # Time: O(n)
 # Space: O(n) - filtered list and its reversed version
 class Solution:
@@ -17,7 +18,9 @@ class Solution:
             left += 1
             right -= 1
         return True
-    
+
+# Time: O(n)
+# Space: O(1) - no extra space used 
 class Solution:
     def isPalindrome(self, s: str) -> bool:
         # arr = [x.lower() for x in s if x.isalnum()]

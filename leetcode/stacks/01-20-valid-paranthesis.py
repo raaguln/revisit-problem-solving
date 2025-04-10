@@ -1,7 +1,14 @@
+# https://leetcode.com/problems/valid-parentheses/description/
 # Time: O(n)
 # Space: O(n)
 class Solution:
     def isValid(self, s: str) -> bool:
+        '''
+        1. Starts with } -> False
+        2. As we keep progressing, extra } -> False
+        3. For every } -> pop out existing {
+        4. at end, if stack is empty -> True
+        '''
         stack = []
         mapping = {
             '}': '{',

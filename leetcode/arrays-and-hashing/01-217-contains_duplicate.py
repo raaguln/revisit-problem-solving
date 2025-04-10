@@ -1,3 +1,4 @@
+# https://leetcode.com/problems/contains-duplicate/description/
 # Attempt 0
 # Time: O(n^2)
 # Space: O(1)

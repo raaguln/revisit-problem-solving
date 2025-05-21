@@ -1,7 +1,9 @@
 '''
-Top down recursion
-Time - O(2^(m+n)) - 2^(m+n) calls
-Space - O(m+n) recursion stack for m*n calls
+Top down
+Time - O(2^(m+n))
+  - each cell calls 2 function calls - forming a binary tree of recursive calls
+  - height of the tree is m + n (maximum steps needed from bottom-right to top-left)
+Space - O(m+n) - max size of recursion stack
 '''
 class Solution:
     def uniquePaths(self, m: int, n: int) -> int:
@@ -15,8 +17,14 @@ class Solution:
 
 '''
 Top down with memoization
-Time - O(2^(m+n)) - 2^(m+n) calls
-Space - O(m+n) recursion stack for m*n calls
+Time - O(m x n) -
+- Each unique cell (i, j) is computed at most once due to memoization (cached in self.cache).
+- The grid has m rows and n columns, so there are at most m × n unique states.
+- Each call does constant work apart from the recursive calls, so total time is O(m × n).
+
+Space - O(m x n)
+- recursion call stack is O(m+n)
+- cache is O(m x n), so this
 '''
 class Solution:
     def __init__(self):

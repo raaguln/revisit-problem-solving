@@ -34,7 +34,7 @@ class Solution:
                 return False
         
             include = recursion(index+1, target - arr[index])
-            exclude = recursion(index + 1, target)
+            exclude = recursion(index+1, target)
             
             return include or exclude
 

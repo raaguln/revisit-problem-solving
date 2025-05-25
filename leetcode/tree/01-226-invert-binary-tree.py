@@ -1,17 +1,20 @@
-# Time: O(n)
-# Space: O(n) for skewed tree, O(logn) for balanced tree
+# https://leetcode.com/problems/invert-binary-tree/description/
+'''
+Time - O(n)
+- Visits every node exactly once
+- `n` is the total number of nodes in the tree
 
+Space - O(h)
+- `h` is the height of the tree
+- Space used by recursion call stack due to depth-first traversal
+- Worst case (skewed tree): O(n)
+- Best case (balanced tree): O(log n)
+'''
 
-# Definition for a binary tree node.
-# class TreeNode:
-#     def __init__(self, val=0, left=None, right=None):
-#         self.val = val
-#         self.left = left
-#         self.right = right
 class Solution:
     def invertTree(self, root: Optional[TreeNode]) -> Optional[TreeNode]:
         if not root:
-            return root
+            return None
         root.left, root.right = root.right, root.left
         self.invertTree(root.left)
         self.invertTree(root.right)

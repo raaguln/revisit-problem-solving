@@ -1,6 +1,15 @@
 # DFS
-# Time: O(n)
-# Space: O(logn) - recursive stack
+"""
+Time - O(n)
+- Each node in both trees is visited exactly once
+- n is the total number of nodes in the smaller of the two trees (assuming both trees are of similar size)
+
+Space - O(h)
+- h is the height of the trees, representing the maximum recursion depth
+- In the worst case (skewed trees), h can be n
+- In the best case (balanced trees), h is O(log n)
+- Space is used by the call stack due to recursion
+"""
 class Solution:
     def isSameTree(self, p: Optional[TreeNode], q: Optional[TreeNode]) -> bool:
         if not p and not q:

@@ -16,6 +16,16 @@ class Solution:
         3. p&q are in right -> same as above
         4. p&q are split -. root is the LCA
         '''
+        '''
+        - If the root itself matches both `p` and `q` (i.e., they are the same node), it returns the root directly.
+        - If the current node is `None`, it returns `None`.
+        - If the current node matches either `p` or `q`, it returns the current node (found one of the targets).
+        - It then recursively searches the left and right subtrees.
+        - If **both** left and right subtrees return non-null results, it means:
+        - `p` was found in one subtree and `q` in the other.
+        - Hence, the current node is their **lowest common ancestor**.
+        - If only one side returns a non-null result, it bubbles that result up — meaning both `p` and `q` are in that subtree.
+        '''
         # both p and q are root node 
         if p.val == q.val == root.val:
             return root.val
@@ -24,7 +34,8 @@ class Solution:
                 return None
             if node.val == p.val or node.val == q.val:
                 return node
-            left, right = dfs(node.left), dfs(node.right)
+            left = dfs(node.left)
+            right = dfs(node.right)
             if (left and right):
                 return node
             if left:

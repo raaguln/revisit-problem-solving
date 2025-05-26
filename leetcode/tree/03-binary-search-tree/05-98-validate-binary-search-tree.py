@@ -34,6 +34,11 @@ Time: O(n) - DFS, goes through all nodes
 Space: O(h) - recursion depth
     - Balanced tree: O(logn)
     - Skewed tree: O(n)
+
+
+Previous solution won't work, as you'll need 3 to also be > 5 in example 2.
+Which can't be done using old solution. So pass a range of acceptable left and
+right.
 '''
 class Solution:
     def isValidBST(self, root: Optional[TreeNode]) -> bool:

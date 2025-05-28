@@ -1,3 +1,4 @@
+# https://leetcode.com/problems/number-of-islands/description/
 # Time: O(V + E) -> each node (V) is visited once and each edge (E) is visited once
 # Space: O(V) -> queue is O(V), seen set is O(V)
 from collections import deque

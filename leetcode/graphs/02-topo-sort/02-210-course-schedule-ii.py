@@ -1,6 +1,47 @@
 '''
 https://leetcode.com/problems/course-schedule-ii/description/
+'''
+# DFS
+class Solution:
+    def findOrder(self, numCourses: int, prerequisites: List[List[int]]) -> List[int]:
+        adjacency_list = defaultdict(list)
 
+        # !! what courses come after v
+        for u, v in prerequisites:
+            adjacency_list[v].append(u)
+
+        indegree = [0] * numCourses
+        for node in adjacency_list:
+            for neighbor in adjacency_list[node]:
+                indegree[neighbor] += 1
+
+        # Add nodes with 0 in-degree to queue
+        q = deque()
+        for node in range(numCourses):
+            if indegree[node] == 0:
+                q.append(node)
+        
+        ordering = []
+        while q:
+            node = q.popleft()
+            ordering.append(node)
+
+            # Update in-degree and append
+            for neighbor in adjacency_list[node]:
+                indegree[neighbor] -= 1
+                if indegree[neighbor] == 0:
+                    q.append(neighbor)
+                    
+        if len(ordering) == numCourses:
+            return ordering
+        # return empty if cycle
+        return []
+
+
+
+
+'''
+GPT DUMPYARD
 Both codes build the order by appending the course 
 after all its prerequisites are done. But since they 
 append at the end, the final order will have courses 

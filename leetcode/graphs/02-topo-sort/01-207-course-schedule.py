@@ -1,6 +1,45 @@
 """
 https://leetcode.com/problems/course-schedule/description/
+"""
+# DFS 1
+class Solution:
+    def canFinish(self, numCourses: int, prerequisites: List[List[int]]) -> bool:
+        adjacency_list = defaultdict(list)
 
+        for u, v in prerequisites:
+            adjacency_list[v].append(u)
+
+        visited = [0] * numCourses  # 0=unvisited, 1=visiting, 2=visited
+
+        def dfs(u):
+            # Cycle found
+            if visited[u] == 1:
+                return True
+            
+            # Already processed
+            if visited[u] == 2:
+                return False
+
+            visited[u] = 1
+            for v in adjacency_list[u]:
+                if dfs(v): return True
+            visited[u] = 2
+            return False
+
+        for i in range(numCourses):
+            # if a cycle is found
+            if dfs(i):
+                return False
+
+        return True
+
+
+# Also solvable using Kahn's cycle detection
+
+
+
+"""
+ARCHIVE - GPT DUMPYARD
 DFS (Time limit exceeded)
 Time Complexity:
 In the worst case, the dfs will be called on each course multiple times.

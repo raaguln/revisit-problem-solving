@@ -49,6 +49,9 @@ Time: O(T log K)
     - max heap - O(K log K)
     - while loop - O(T log K)
     - cooldown - O(T)
+
+Time: O(T log A), where T = number of tasks, A = unique tasks
+Space: O(A) for heap and cooldown queue
 '''
 from collections import deque
 import heapq

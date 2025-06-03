@@ -1,4 +1,6 @@
 '''
+https://leetcode.com/problems/combination-sum/description/
+
 Constraints:
 1. All elements are unique (IMPORTANT)
 2. Same element can be used multiple times
@@ -9,14 +11,21 @@ class Solution:
         output = []
         def recursion(i, sub):
             summation = sum(sub)
+
+            # index OOB or sum exceeds target
             if i >= len(candidates) or summation > target:
                 return
+            # 
             if sum(sub) == target:
                 if sub not in output:
                     output.append(sub)
                 return
+            
+            # 1. include current again
             recursion(i, sub + [candidates[i]])
+            # 2. don't include current, move to next
             recursion(i+1, sub)
+            # 3. include current, move to next
             recursion(i+1, sub + [candidates[i]])
             
         recursion(0, [])
@@ -24,6 +33,7 @@ class Solution:
     
 '''
 Avoid duplicate by using set (did not optimize much)
+Also, the 3rd call is unnecessary because it is already covered by 1st call
 '''
 class Solution:
     def combinationSum(self, candidates: List[int], target: int) -> List[List[int]]:
@@ -41,7 +51,6 @@ class Solution:
                 return
             recursion(i, sub + [candidates[i]])
             recursion(i+1, sub)
-            recursion(i+1, sub + [candidates[i]])
             
         recursion(0, [])
         return output
@@ -65,9 +74,7 @@ class Solution:
             # Old summation
             recursion(i+1, sub, summation)
             # New summation
-            summation += candidates[i]
-            recursion(i, sub + [candidates[i]], summation)
-            recursion(i+1, sub + [candidates[i]], summation)
+            recursion(i, sub + [candidates[i]], summation + candidates[i])
             
         recursion(0, [], 0)
         return output

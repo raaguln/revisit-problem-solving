@@ -10,12 +10,12 @@ class Solution:
             if openBrackets == closeBrackets == n:
                 output.append(string)
                 return
+            # If we can still add an open parenthesis
             if openBrackets < n:
                 generate(string + '(', openBrackets+1, closeBrackets)
+            # If we can add a closing parenthesis (only if it won't exceed open)
             if openBrackets > closeBrackets:
                 generate(string + ')', openBrackets, closeBrackets+1)
-            
 
-        openBrackets = closeBrackets = 0
-        generate('', openBrackets, closeBrackets)
+        generate('', 0, 0)
         return output

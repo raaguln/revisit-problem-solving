@@ -1,18 +1,24 @@
 # https://leetcode.com/problems/subsets/description/
 '''
 1. Backtracking
-Time complexity:
+Time - 
+- For a list of size n, there are 2ⁿ possible subsets.
+- Each subset size - upto n
+    sub + [nums[i]] -> list concat -> O(n) time worst case
+- O(2ⁿ) * O(n)
 
-The recursion explores two possibilities for each element: include it or exclude it.
-For n elements, total subsets are 2^n.
-Each recursive call eventually creates a subset, so total calls and subsets generated are about 2^n.
-Constructing each subset (when adding an element) takes O(k) where k is the current subset length, but since all subsets combined have total elements summed up to n * 2^(n-1), the complexity remains O(n * 2^n).
+Space - 
+- You're storing all 2ⁿ subsets, each of which can be up to n elements long.
+- recursion stack - depth of n
 
-Space complexity:
+recursion(0, [])
+├── recursion(1, [1])
+│   ├── recursion(2, [1, 2])
+│   └── recursion(2, [1])
+└── recursion(1, [])
+    ├── recursion(2, [2])
+    └── recursion(2, [])
 
-The recursion stack depth is O(n) because it goes down one level per element.
-The output list stores 2^n subsets, each of average size O(n), so total space for storing results is O(n * 2^n).
-Temporary space used by subsets during recursion is proportional to recursion depth, O(n).
 '''
 class Solution:
     def subsets(self, nums: List[int]) -> List[List[int]]:
@@ -30,18 +36,25 @@ class Solution:
 
 '''
 2. Backtracking
+
+recursion(0, [])
+├── recursion(1, [1])
+│   ├── recursion(2, [1, 2])
+│   └── recursion(2, [1])
+└── recursion(1, [2])
+    └── recursion(2, [2])
 '''
 class Solution:
     def subsets(self, nums: List[int]) -> List[List[int]]:
         subsets = []
         
-        def recursion(start: int, current_subset: List[int]):
-            subsets.append(current_subset[:])        # Append a copy of the current subset
+        def recursion(start, sub):
+            subsets.append(sub[:])        # Append a copy of the current subset
             
             for i in range(start, len(nums)):
-                current_subset.append(nums[i])      # Include nums[i]
-                recursion(i + 1, current_subset)    # Move forward with next elements
-                current_subset.pop()                # Backtrack: remove last added element
+                sub.append(nums[i])      # Include nums[i]
+                recursion(i+1, sub)    # Move forward with next elements
+                sub.pop()                # Backtrack: remove last added element
         
         recursion(0, [])
         return subsets

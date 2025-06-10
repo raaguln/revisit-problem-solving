@@ -10,6 +10,31 @@ Space - O(h)
 - In the best case (balanced tree), h is O(log n)
 - The `result` list can store up to O(n) node values across all paths, but the auxiliary space (excluding output) is O(h)
 '''
+
+'''
+How it works
+Start at root 1:
+path = [1]
+
+Go left to 2:
+path = [1, 2]
+
+It's a leaf → save [1, 2] to result
+
+Backtrack: remove 2
+path = [1]
+
+Go right to 3:
+path = [1, 3]
+
+It's a leaf → save [1, 3] to result
+
+Backtrack: remove 3
+path = [1]
+
+Backtrack from root:
+path = []
+'''
 class Solution:
     def binaryTreePaths(self, root: TreeNode) -> List[List[int]]:
         result = []

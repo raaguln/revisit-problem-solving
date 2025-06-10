@@ -78,3 +78,41 @@ class Solution:
             
         recursion(0, [], 0)
         return output
+
+
+'''
+
+backtrack(0, [], 0)
+├── backtrack(0, [2], 2)
+│   ├── backtrack(0, [2, 2], 4)
+│   │   └── backtrack(0, [2, 2, 2], 6) ← pruned
+│   │   └── backtrack(1, [2, 2, 3], 7) ← pruned
+│   └── backtrack(1, [2, 3], 5) ← valid
+├── backtrack(1, [3], 3)
+│   └── backtrack(1, [3, 3], 6) ← pruned
+'''
+class Solution:
+    def combinationSum(self, candidates: List[int], target: int) -> List[List[int]]:
+        candidates.sort()  # Sort to help pruning and avoid duplicates
+        output = []
+        
+        def backtrack(start: int, current: List[int], current_sum: int):
+            if current_sum == target:
+                output.append(current[:])
+                return
+            
+            if current_sum > target:
+                return
+            
+            # Explore candidates starting from 'start' index
+            for i in range(start, len(candidates)):
+                current.append(candidates[i])
+
+                # Since we can reuse same element, 'i' remains the same
+                backtrack(i, current, current_sum + candidates[i])
+                
+                # Backtrack
+                current.pop()
+        
+        backtrack(0, [], 0)
+        return output

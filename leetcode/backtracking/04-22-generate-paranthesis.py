@@ -19,3 +19,29 @@ class Solution:
 
         generate('', 0, 0)
         return output
+
+# Equally optimal
+class Solution:
+    def generateParenthesis(self, n: int) -> List[str]:
+        output = []
+        
+        def backtrack(path, open_count, close_count):
+            # Base case: we've used all n pairs
+            if len(path) == 2 * n:
+                output.append(''.join(path))
+                return
+            
+            # Add opening parenthesis if we haven't used all n
+            if open_count < n:
+                path.append('(')
+                backtrack(path, open_count + 1, close_count)
+                path.pop()
+            
+            # Add closing parenthesis if it won't make string invalid
+            if open_count > close_count:
+                path.append(')')
+                backtrack(path, open_count, close_count + 1)
+                path.pop()
+        
+        backtrack([], 0, 0)
+        return output

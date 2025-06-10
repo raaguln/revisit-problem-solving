@@ -3,6 +3,9 @@
 This problem guarantees that the value will not already exist in BST.
 So we will always insert at leaf=None positions
 
+i.e The only place where this can be done without breaking structure 
+is at a leaf position (i.e., where a child would be None).
+
 If duplicates were allowed, use count = n and update that field for that node
 '''
 

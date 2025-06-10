@@ -1,4 +1,8 @@
 # https://leetcode.com/problems/maximum-depth-of-binary-tree/description/
+
+## HEIGHT DEFINITION HERE - NO. OF NODES
+## NOT EDGES
+
 # 1. DFS recursion
 '''
 Time - O(n)
@@ -24,7 +28,8 @@ class Solution:
         height = dfs(root)
         return height
 
-# DFS Better code
+# DFS Better code (post order)
+# left → right → process node
 class Solution:
     def maxDepth(self, root: Optional[TreeNode]) -> int:
         if not root:

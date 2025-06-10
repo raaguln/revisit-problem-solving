@@ -6,7 +6,9 @@ Given the root of a binary search tree and a node p in it,
 return the in-order successor of that node in the BST. 
 If the given node has no in-order successor in the tree, return null.
 
-The successor of a node p is the node with the smallest key greater than p.val.
+- in-order -> Left → Node → Right
+- next node in the in-order traversal, i.e., 
+  the smallest node that is greater than the given node.
 
 Input: root = [2,1,3], p = 1
 Output: 2
@@ -17,6 +19,27 @@ Input: root = [5,3,6,2,4,null,null,1], p = 6
 Output: null
 Explanation: There is no in-order successor of the current node, so the answer is null.
 '''
+# Solution1 - sorted list, and then find the next index
+# O(n) traversal, O(n) search
+class Solution:
+    def inorderSuccessor(self, root: TreeNode, p: TreeNode) -> Optional[TreeNode]:
+        inorder_nodes = []
+
+        def inorder(node):
+            if not node:
+                return
+            inorder(node.left)
+            inorder_nodes.append(node)
+            inorder(node.right)
+
+        inorder(root)
+
+        for i in range(len(inorder_nodes)):
+            if inorder_nodes[i].val == p.val:
+                return inorder_nodes[i+1] if i + 1 < len(inorder_nodes) else None
+
+
+# Full tree traversal - inefficient
 class Solution:
     def inorderSuccessor(self, root: TreeNode, p: TreeNode) -> Optional[TreeNode]:
         successor = None
@@ -32,7 +55,9 @@ class Solution:
 
         return successor
 
-
+# Using BST properties
+# O(h) - which is usually O(log n) since BST is balanced
+# p - is the node in the tree (it will have its left and right values)
 class Solution:
     def getMin(self, node: TreeNode) -> TreeNode:
         while node.left:

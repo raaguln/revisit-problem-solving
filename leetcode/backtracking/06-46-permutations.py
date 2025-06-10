@@ -1,5 +1,12 @@
-# Time: O(n * n!) where n is the length of the input list
-# Space: O(n * n!) where n is the length of the input list
+'''
+# https://leetcode.com/problems/permutations/description/
+
+# Time: O(n! × n²) where n is the length of the input list
+# Space: O(n! × n²) where n is the length of the input list
+
+Each recursive call creates 2 new lists
+For n=8, this creates ~80,000 temporary lists!
+'''
 class Solution:
     def permute(self, nums: List[int]) -> List[List[int]]:
         output = []

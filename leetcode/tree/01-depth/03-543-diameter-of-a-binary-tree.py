@@ -1,5 +1,5 @@
 # https://leetcode.com/problems/diameter-of-binary-tree/
-# DFS
+# DFS Postorder
 '''
 Time - O(n)
 - Each node is visited exactly once during the DFS traversal

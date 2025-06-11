@@ -12,4 +12,3 @@ class Solution:
                 if i >= len(word) or ref[i] != word[i]:
                     return ref[:i]
         return ref
-            

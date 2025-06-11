@@ -1,4 +1,6 @@
 '''
+https://leetcode.com/problems/house-robber/description/
+
 Brainstorm:
 1. house = [], max = 0
 2. house = [4], max = first element (4)

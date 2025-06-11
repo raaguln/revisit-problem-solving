@@ -29,3 +29,29 @@ class Solution:
                 r = mid
         
         return nums[l]
+
+# Alternatively - 
+class Solution:
+    def singleNonDuplicate(self, nums: List[int]) -> int:
+        l, r = 0, len(nums) - 1
+        
+        while l < r:
+            mid = (l + r) // 2
+            
+            if nums[mid] == nums[mid - 1]:
+                # Pair is mid-1 and mid, so unique must be on right side if mid is odd
+                if (mid - 1) % 2 == 0:
+                    l = mid + 1
+                else:
+                    r = mid - 2
+            elif nums[mid] == nums[mid + 1]:
+                # Pair is mid and mid+1, unique must be on right side if mid is even
+                if mid % 2 == 0:
+                    l = mid + 2
+                else:
+                    r = mid - 1
+            else:
+                # mid is unique
+                return nums[mid]
+        
+        return nums[l]

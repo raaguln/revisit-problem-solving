@@ -1,4 +1,6 @@
 '''
+https://leetcode.com/problems/unique-paths/description/
+
 Top down
 Time - O(2^(m+n))
   - each cell calls 2 function calls - forming a binary tree of recursive calls
@@ -58,6 +60,9 @@ class Solution:
             for j in range(1, n+1):
                 if i == 1 and j == 1:
                     continue
+                # ways to reach i,j = 
+                # ways to reach cell directly above + 
+                # ways to reach cell directly to the left
                 ways[i][j] = ways[i-1][j] + ways[i][j-1]
         return ways[m][n]
 

@@ -29,19 +29,19 @@ Space Complexity: O(n)
 '''
 class Solution:
     def smallerNumbersThanCurrent(self, nums: List[int]) -> List[int]:
-        '''
-        Create fixed frequency count
-        '''
         count = [0] * 102
-        for i in range(len(nums)):
-            count[nums[i]+1] += 1
 
+        # Count frequency of each number
+        for num in nums:
+            count[num] += 1
+
+        # Build prefix sums: count[i] will store how many numbers are <= i
         for i in range(1, 102):
-            count[i] += count[i-1]
+            count[i] += count[i - 1]
 
+        # For each number, how many are smaller = count[num - 1] if num > 0 else 0
         output = []
-        for i in range(len(nums)):
-            output.append(
-                count[nums[i]]
-            )
+        for num in nums:
+            output.append(count[num - 1] if num > 0 else 0)
+
         return output

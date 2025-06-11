@@ -1,4 +1,6 @@
 '''
+https://leetcode.com/problems/longest-common-subsequence/description/
+
 Subsequences - 
 - maintains order
 - can be contigious or non-contigious
@@ -77,13 +79,53 @@ class Solution:
         
 
 '''
-Time - O(m * n)
-- Two nested loops each run up to m and n times respectively
-- Each iteration does O(1) work (comparison and max operation)
+class Solution:
+    def longestCommonSubsequence(self, text1: str, text2: str) -> int:
+        m, n = len(text1), len(text2)
+        dp = [[0 for _ in range(n+1)] for _ in range(m+1)]
+        
+        for i in range(m-1, -1, -1):
+            for j in range(n-1, -1, -1):
+                if text1[i] == text2[j]:
+                    dp[i][j] = 1 + dp[i+1][j+1]
+                else:
+                    dp[i][j] = max(dp[i+1][j], dp[i][j+1])
+        return dp[0][0]
 
+"""
+Time - O(m * n)
 Space - O(m * n)
-- A 2D dp array of size (m+1) x (n+1) is used to store intermediate results
-- No recursion, so call stack space is O(1)
+
+Explanation -  
+i - index in text1  
+j - index in text2  
+
+DP logic -  
+QUESTION -> What is the length of the longest common subsequence between text1[i:] and text2[j:]?
+
+1. If text1[i] == text2[j]:  
+    - Characters match → Include this character → dp[i][j] = 1 + dp[i+1][j+1]  
+2. If text1[i] != text2[j]:  
+    - We skip one character (either from text1 or text2)  
+    - Try both options and take the max:
+        - Skip text1[i] → dp[i+1][j]
+        - Skip text2[j] → dp[i][j+1]  
+    - dp[i][j] = max(dp[i+1][j], dp[i][j+1])
+
+Base Case Initialization -  
+- If either string is exhausted, LCS = 0  
+- So we initialize dp[m][*] = 0 and dp[*][n] = 0  
+
+Table - Step 0 after base case initialization (m = 3, n = 3 example) →  
+  ""  d   o   g  
+""[0][0][0][0]  
+c [0][ ][ ][ ]  
+a [0][ ][ ][ ]  
+t [0][ ][ ][ ]  
+↑  
+text1 → "cat"
+"""
+
 '''
 
 class Solution:

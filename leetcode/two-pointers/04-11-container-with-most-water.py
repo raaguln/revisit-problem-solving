@@ -9,8 +9,12 @@ class Solution:
         maximum = 0
         left, right = 0, len(height) - 1
         while left < right:
-            area = (right - left) * min(height[left], height[right])
+            box_base = right - left
+            box_height = min(height[left], height[right])
+            
+            area = box_base * box_height
             maximum = max(area, maximum)
+            
             if height[left] < height[right]:
                 left += 1
             else:

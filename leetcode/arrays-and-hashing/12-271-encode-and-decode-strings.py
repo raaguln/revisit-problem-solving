@@ -8,7 +8,7 @@ class Codec:
         """
         encoded = []
         for word in strs:
-            encoded.extend([ str(len(word)), "#" + word])
+            encoded.append(f"{len(word)}#{word}")
         return "".join(encoded)
 
     def decode(self, s: str) -> List[str]:

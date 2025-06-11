@@ -1,4 +1,6 @@
 '''
+https://leetcode.com/problems/climbing-stairs/description/
+
 Brainstorm:
 Options for stes we can take - 1 or 2
 1. If n <= 0 => ways = 0
@@ -82,6 +84,10 @@ class Solution:
             1: 1
         }
         for step in range(2, n+1):
+            # if step = 2
+            # no of ways to climb to step 2 = 
+            # no of ways to climb to step 2 if I took 1 steps already +
+            # no of ways to climb to step 2 if I took 2 steps already
             cache[step] = cache[step-1] + cache[step-2]
         return cache[n]
     

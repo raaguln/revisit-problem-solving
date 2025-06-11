@@ -1,4 +1,6 @@
 '''
+https://leetcode.com/problems/triangle/description/
+
 Time - O(2^n)
 - At each level, two recursive calls are made (except the last row)
 - Maximum recursion depth is n (number of rows)
@@ -69,15 +71,15 @@ dp after initialization:
 
 After processing row 2 (6,5,7):  
 dp = [6+min(4,1), 5+min(1,8), 7+min(8,3)]  
-dp = [6+1=7, 5+1=6, 7+3=10, 3]
+dp = [6+1=7, 5+1=6, 7+3=10, 3] (last value useless)
 
 After processing row 1 (3,4):  
 dp = [3+min(7,6), 4+min(6,10)]  
-dp = [3+6=9, 4+6=10, 10, 3]
+dp = [3+6=9, 4+6=10, 10, 3] (last 2 values useless)
 
 After processing row 0 (2):  
 dp = [2+min(9,10)]  
-dp = [11, 10, 10, 3]
+dp = [11, 10, 10, 3] (last 3 values useless)
 
 Answer = dp[0] = 11
 '''

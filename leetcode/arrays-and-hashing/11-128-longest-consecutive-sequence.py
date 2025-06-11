@@ -1,4 +1,5 @@
 # https://leetcode.com/problems/longest-consecutive-sequence/description/
+
 # Time: O(nlogn) - sorting
 # Space: O(n) - set
 class Solution:
@@ -33,18 +34,22 @@ Logic -
 Create set. Sequence starts if num-1 is not in the set. Update length of sequence till num+1 is in the set.
 Time: O(n)
 Space: O(n)
-'''  
-
+'''
 class Solution:
     def longestConsecutive(self, nums: List[int]) -> int:
         lookup = set(nums)
         longest = 0
         for n in lookup:
+            # Start counting only if n-1 is not present
             if n-1 in lookup:
                 continue
+            
+            # Count
             sequenceLength = 1
             while n+1 in lookup:
                 sequenceLength += 1
                 n += 1
+
+            # Update longest
             longest = max(longest, sequenceLength)
         return longest

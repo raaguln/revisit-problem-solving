@@ -1,3 +1,42 @@
+'''
+https://leetcode.com/problems/longest-repeating-character-replacement/description/
+
+O(n)
+Space - O(min(m, n))
+
+left = 0
+right = 0 → 'p': store index → max_len = 1 -> {p:0}
+right = 1 → 'w': store index → max_len = 2 -> {p:0, w:0}
+right = 2 → 'w' again → duplicate → move left to 2 → max_len remains 2
+right = 3 → 'k': store index → max_len = 2
+right = 4 → 'e': store index → max_len = 3
+right = 5 → 'w': already seen at 2, but left = 2, so move left = 3 → max_len stays 3
+✅ Final output: 3
+'''
+
+char_index = {}        # Stores the last seen index of each character
+left = 0               # Start of the sliding window
+max_len = 0            # Result variable
+
+# Expand the window with `right` pointer
+for right in range(len(s)):
+    curr_char = s[right]
+
+    # If the character was seen before and is inside the current window
+    if curr_char in char_index and char_index[curr_char] >= left:
+        # Move the left pointer to one position after the last seen index
+        left = char_index[curr_char] + 1
+
+    # Update the last seen index of current character
+    char_index[curr_char] = right
+    
+    # Update maximum length
+    max_len = max(max_len, right - left + 1)
+
+
+
+
+
 # Incorrect solution
 class Solution:
     def characterReplacement(self, s: str, k: int) -> int:
@@ -96,3 +135,5 @@ class Solution:
 #             if count1 == count2:
 #                 return True
 #         return False
+
+

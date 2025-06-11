@@ -86,17 +86,29 @@ def has_cycle_dfs(adj):
     n = len(adj)
     visited = [0] * n  # 0=unvisited, 1=visiting, 2=visited
 
-    def dfs(u):
-        if visited[u] == 1: return True   # cycle found
-        if visited[u] == 2: return False  # already processed
+    def dfs(node):
+        # Node is being visited and encountered again -> cycle detected
+        if visited[node] == 1:
+            return True
+
+        # Node and its descendants are already fully processed
+        if visited[node] == 2:
+            return False
         
-        visited[u] = 1
-        for v in adj[u]:
-            if dfs(v): return True
-        visited[u] = 2
+        visited[node] = 1
+        for neighbor in adj[node]:
+            if dfs(neighbor):
+                return True
+        visited[node] = 2
         return False
 
-    return any(dfs(i) for i in range(n))
+    # Handle disconnected graphs by running DFS from each unvisited node
+    for i in range(n):
+        if visited[i] == 0:
+            if dfs(i):
+                return True  # cycle found
+
+    return False  # no cycle found
 
 # 2. Kahns
 def has_cycle_kahn(adj):

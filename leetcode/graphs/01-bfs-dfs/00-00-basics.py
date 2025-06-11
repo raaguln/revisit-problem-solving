@@ -27,10 +27,12 @@ Space: O(V) -> recursive call stack is O(V), seen set is O(V)
 '''
 # 1. Recursive (with adjacency list)
 def dfs(node):
+    # preorder processing - result.append(node)
     seen.add(node)
     for neighbor in adj_list[node]:
         if neighbor not in seen:
             dfs(neighbor)
+    # postorder processing
 
 seen = set()
 dfs(0)

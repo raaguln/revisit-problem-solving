@@ -22,7 +22,8 @@ class Solution:
 
             visited[u] = 1
             for v in adjacency_list[u]:
-                if dfs(v): return True
+                if dfs(v):
+                    return True
             visited[u] = 2
             return False
 

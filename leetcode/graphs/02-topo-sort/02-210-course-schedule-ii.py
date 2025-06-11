@@ -3,39 +3,39 @@ https://leetcode.com/problems/course-schedule-ii/description/
 '''
 # DFS
 class Solution:
-    def findOrder(self, numCourses: int, prerequisites: List[List[int]]) -> List[int]:
-        adjacency_list = defaultdict(list)
+    def findOrder(numCourses, prerequisites):
+        adj = [[] for _ in range(numCourses)]
+        for dest, src in prerequisites:
+            adj[src].append(dest)
 
-        # !! what courses come after v
-        for u, v in prerequisites:
-            adjacency_list[v].append(u)
+        visited = [0] * numCourses  # 0 = unvisited, 1 = visiting, 2 = visited
+        topo_sort = []
+        has_cycle = False
 
-        indegree = [0] * numCourses
-        for node in adjacency_list:
-            for neighbor in adjacency_list[node]:
-                indegree[neighbor] += 1
+        def dfs(node):
+            nonlocal has_cycle
+            if visited[node] == 1:
+                has_cycle = True
+                return
+            if visited[node] == 2:
+                return
+            
+            visited[node] = 1  # mark as visiting
+            for neighbor in adj[node]:
+                dfs(neighbor)
+                if has_cycle:
+                    return
+            visited[node] = 2  # mark as visited
+            topo_sort.append(node)  # postorder: add after all neighbors
 
-        # Add nodes with 0 in-degree to queue
-        q = deque()
-        for node in range(numCourses):
-            if indegree[node] == 0:
-                q.append(node)
-        
-        ordering = []
-        while q:
-            node = q.popleft()
-            ordering.append(node)
+        for i in range(numCourses):
+            if visited[i] == 0:
+                dfs(i)
+                if has_cycle:
+                    return []  # cycle detected → no valid ordering
 
-            # Update in-degree and append
-            for neighbor in adjacency_list[node]:
-                indegree[neighbor] -= 1
-                if indegree[neighbor] == 0:
-                    q.append(neighbor)
-                    
-        if len(ordering) == numCourses:
-            return ordering
-        # return empty if cycle
-        return []
+        return topo_sort[::-1]  # reverse to get correct topological order
+
 
 
 

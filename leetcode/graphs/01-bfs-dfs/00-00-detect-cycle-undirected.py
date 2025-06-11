@@ -28,6 +28,7 @@ def has_cycle(node, parent):
     return False
 
 # Simplifies to
+# Only detects cycles in connected component containing node
 def has_cycle(node, parent):
     seen.add(node)
     for neighbor in adj_list[node]:
@@ -44,9 +45,12 @@ adj_list = {
     2: [1, 3],
     3: [2]
 }
-seen = set()
-# Run the check
-cycle_found = has_cycle(0, -1)
+# Handle disconnected graphs
+for node in adj_list:
+    if node not in seen:
+        if has_cycle(node):
+            return True
+return False
 
 '''
 BFS
@@ -78,9 +82,8 @@ def has_cycle_bfs(start):
     return False
 
 # Handle disconnected graphs
-cycle_found = False
 for node in adj_list:
     if node not in seen:
         if has_cycle_bfs(node):
-            cycle_found = True
-            break
+            return True
+return False

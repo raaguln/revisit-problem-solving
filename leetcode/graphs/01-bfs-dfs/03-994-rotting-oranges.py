@@ -1,5 +1,7 @@
 # https://leetcode.com/problems/rotting-oranges/description/
 '''
+MULTI SOURCE BFS
+
 Time: O(m*n) -> getting rotten oranges is O(m*n) and BFS is O(m*n) (each fresh orange is visited once)
 Space: O(m*n) -> queue can have all the oranges in the worst case
 

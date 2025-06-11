@@ -38,6 +38,7 @@ class Solution:
         connected_components = 0
 
         def dfs(node):
+            visited.add(node)
             for neighbor in adjacency_list[node]:
                 if neighbor not in visited:
                     visited.add(neighbor)
@@ -45,11 +46,9 @@ class Solution:
         
         # For each node, perform DFS and find CC
         for node in range(n):
-            if node in visited:
-                continue
-            visited.add(node)
-            connected_components += 1
-            dfs(node)
+            if node not in visited:
+                connected_components += 1
+                dfs(node)
 
         return connected_components
 

@@ -1,3 +1,11 @@
+'''
+
+There are two cases:
+1. Non-wrapping case (normal subarray):
+Use Kadane’s algorithm to find the maximum subarray sum.
+2. Wrapping case (subarray wraps around the end to the beginning):
+Total sum of array - the minimum subarray sum (i.e., the part we exclude).
+'''
 class Solution:
     def maxSubarraySumCircular(self, nums: List[int]) -> int:
         '''

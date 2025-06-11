@@ -19,8 +19,9 @@ class Solution:
         
         while l < r:
             mid = (l + r) // 2
-            # Ensure mid is even
-            if mid % 2 == 1:
+            # Ensure mid is even, so that
+            # the duplicate is always at the right
+            if mid % 2:
                 mid -= 1
             
             if nums[mid] == nums[mid + 1]:

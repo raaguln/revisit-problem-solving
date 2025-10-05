@@ -1,0 +1,26 @@
+# https://leetcode.com/problems/merge-k-sorted-lists/
+class Solution:
+    def mergeKLists(self, lists: List[Optional[ListNode]]) -> Optional[ListNode]:
+        heap = []
+
+        # put first node into heap
+        for i, node in enumerate(lists):
+            if node:
+                heapq.heappush(heap, (node.val, i, node))
+        
+        print(heap)
+        # 
+        dummy = ListNode(0)
+        curr = dummy
+
+        while heap:
+            val, i, node = heapq.heappop(heap)
+            
+            # linked list magic
+            curr.next = node
+            curr = curr.next
+
+            if node.next:
+                heapq.heappush(heap, (node.next.val, i, node.next))
+        
+        return dummy.next

@@ -1,12 +1,17 @@
 '''
+
 1. Djikstras with k stops
 - k stops -> k+1 edges
 - Most optimal
+
+you need to track both cost and stops since the 
+normal Dijkstra doesn’t handle constraints like number of stops.
 '''
 
 class Solution:
     def findCheapestPrice(self, n, flights, src, dst, k):
         graph = defaultdict(list)
+        # [from, to, price]
         for u, v, w in flights:
             graph[u].append((v, w))
         

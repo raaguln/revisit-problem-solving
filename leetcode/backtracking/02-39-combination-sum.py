@@ -81,6 +81,10 @@ class Solution:
 
 
 '''
+Constraints:
+1. All elements are unique (IMPORTANT)
+2. Same element can be used multiple times
+3. All +ve integers
 
 backtrack(0, [], 0)
 ├── backtrack(0, [2], 2)

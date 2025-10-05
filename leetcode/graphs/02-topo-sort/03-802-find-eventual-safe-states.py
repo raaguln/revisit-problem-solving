@@ -8,12 +8,6 @@ from that node leads to a terminal node (or another safe node).
 Return an array containing all the safe nodes of 
 the graph. The answer should be sorted in ascending order.
 """
-"""
-The problem is really about detecting cycles.
-If a node is part of a cycle or can reach a cycle, it's not safe.
-If a node has no outgoing edges (terminal node), it’s safe.
-If all its children are safe, then the node itself is safe.
-"""
 
 """
 DFS + 3 coloring
@@ -48,7 +42,11 @@ class Solution:
             return True
         
         # run DFS for every node
-        return [i for i in range(n) if dfs(i)]
+        safe_nodes = []
+        for i in range(n):
+            if dfs(i):
+                safe_nodes.append(i)
+        return safe_nodes
 
 
 """

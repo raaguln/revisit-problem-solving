@@ -46,7 +46,10 @@ class Solution:
 
 
 '''
-Bellman ford
+Bellman ford - works for negative edges too
+- Relax all edges (V - 1) times.
+- If you can relax any edge again on the Vth iteration, there's a negative cycle.
+- Time = O(V * E)
 
 '''
 class Solution:

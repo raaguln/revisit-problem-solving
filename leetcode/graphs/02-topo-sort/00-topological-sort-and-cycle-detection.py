@@ -48,6 +48,8 @@ Kahn's algorithm
 - in-degree for a node = no of incoming edges to a node
 - array to keep track of in-degree of each node
 - queue to add and process nodes with no in-degree
+
+CAN'T PRODUCE VALID TS WHEN THERE IS A CYCLE!
 '''
 def topo_sort_kahn(adj):
     n = len(adj)
@@ -109,6 +111,15 @@ def has_cycle_dfs(adj):
                 return True  # cycle found
 
     return False  # no cycle found
+
+
+
+
+
+
+
+
+
 
 # 2. Kahns
 def has_cycle_kahn(adj):
